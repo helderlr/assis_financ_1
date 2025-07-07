@@ -1,0 +1,118 @@
+
+1️⃣ Criar a Página de Venda (Frontend)
+
+Passos:
+
+1. Landing Page baeado no pdf em anexo
+
+2. Criação do Formulário:
+   - Crie um formulário simples onde o usuário fornece:
+     - dados cadastrais completos (nome,cpf,endereco,bairro,cep,cidade,estado,celular,email)
+     - Nome da Aplicação (assistente financeiro sem espaco)-validar se ja existe 
+     - Número do Celular (celular conectar evolutionapi)
+     - Método de Pagamento (por exemplo, um botão de pagamento que redireciona para uma plataforma de pagamento como Stripe ou PayPal ou mercado pago).
+
+   3. Integrar com uma API de Pagamento (Stripe/PayPal/mercado pago):
+   - Você pode integrar o Stripe ou PayPal para processar os pagamentos.
+   - Para isso, você precisará:
+     - Criar uma conta no Stripe ou PayPal ou mercado pago.
+     - Usar as SDKs deles para integrar a cobrança diretamente na sua página.
+   - Depois que o pagamento for confirmado, você pode redirecionar o usuário para uma página de sucesso.
+
+Backend para Processamento da Venda
+
+O backend será responsável por processar o pagamento, criar um novo projeto no Supabase, e integrar o número de celular à Evolution API.
+
+Passos:
+
+1. Criação de um Servidor Backend (Node.js):
+   - Você pode usar Node.js com Express para configurar um servidor simples que vai lidar com o pagamento e a criação do projeto.
+
+2. Configuração do Servidor Web para Receber Dados do Formulário:
+   - O backend deve receber os dados do formulário (nome da aplicação e número de celular,dados cadastrais) e processar as etapas seguintes:
+     - Verificar se o pagamento foi realizado.
+     - Criar o projeto no Supabase.
+     - Conectar o número de celular à Evolution API.
+
+3️⃣ Integração com o Supabase
+
+O Supabase é um banco de dados como serviço e é útil para armazenar dados de usuários e projetos. Para cada nova venda, será criado um novo projeto no Supabase.
+
+Passos:
+
+1. Criação de Conta no Supabase:
+   - Crie uma conta no Supabase (https://supabase.io) e configure um novo projeto. 
+   - Crie as tabelas necessárias para armazenar os dados do usuário e projeto, como:
+     - nomeAplicacao (nome da aplicação)
+     - numeroCelular (número do celular)
+     - statusPagamento (confirmado ou não)
+
+2. Integração com Supabase (via API REST ou Supabase SDK):
+   - Utilize a API REST do Supabase ou a SDK para interagir com o banco de dados.
+
+3. *Após o pagamento ser confirmado*, você atualiza o *statusPagamento* no Supabase para 'confirmado'.
+
+---
+
+*4️⃣ Conectar o Número de Celular à Evolution API*
+
+Agora, a parte mais técnica do seu fluxo é *conectar o número de celular à Evolution API*. Supondo que você tenha uma *Evolution API* configurada e rodando em uma VPS, a integração com essa API pode ser feita via *requisições HTTP* (usando `axios`, `fetch` ou outra biblioteca).
+
+Passos:
+
+1. *Fazer Requisição para a Evolution API*:
+   - Você pode enviar o número de celular para a *Evolution API* que estará configurada na VPS.
+   - A Evolution API pode estar configurada para associar esse número de celular com algum tipo de processo ou cliente.
+
+2 Chamar a Função de Conexão Após Criar o Projeto:
+- Após a criação do projeto no Supabase e confirmação do pagamento, você chama a função que conecta o número de celular à Evolution API.
+
+---
+
+5️⃣ Workflow Completo no n8n
+
+Agora, para automatizar esse processo no n8n, você pode criar um fluxo de trabalho que integre todas essas etapas. Vou te dar um exemplo geral de como isso seria estruturado:
+
+Fluxo no n8n:
+
+1. Receber Dados do Frontend (Webhook):
+   - Configure um Webhook no n8n para receber os dados do formulário (nome da aplicação, número de celular).
+   
+2. Verificar Pagamento (via API de Pagamento):
+   - Adicione um nó que verifique se o pagamento foi processado corretamente (isso pode ser feito com a API de pagamento do Stripe ou PayPal).
+   
+3. Criar Projeto no Supabase:
+   - Utilize o nó de HTTP Request ou a integração direta do Supabase (via PostgreSQL) para criar o novo projeto no banco de dados do Supabase.
+   
+4. Conectar o Número de Celular à Evolution API:
+   - Configure um HTTP Request para fazer a chamada à Evolution API com o número de celular.
+
+5. Resposta ao Frontend:
+   - Envie uma resposta ao frontend confirmando que o projeto foi criado e o número de celular foi conectado com sucesso.
+
+---
+
+6️⃣ Hospedagem da Página de Venda e Backend
+
+ Para finalizar, você precisa hospedar a sua página de vendas e o backend.
+
+1. Hospedagem da Página de Venda:
+   - Você pode hospedar a página de vendas em qualquer plataforma de hospedagem de sites como Netlify, Vercel, GitHub Pages, ou até mesmo em uma VPS.
+
+2. Hospedagem do Backend:
+   - O servidor backend (Node.js) pode ser hospedado em uma VPS, Heroku, AWS, DigitalOcean, ou outra plataforma de sua escolha.
+
+3. Hospedagem do n8n:
+   - O n8n pode ser instalado em sua VPS ou utilizado em uma instância Docker.
+   - Acesse a interface do n8n para configurar os fluxos de trabalho
+
+Resumo do Passo a Passo:
+
+1. Criar uma página de vendas onde o usuário preenche nome da aplicação e número de celular.
+2. Integrar com uma plataforma de pagamento (Stripe/PayPal).
+3. Criar um servidor backend para processar o pagamento e interagir com o Supabase.
+4. Criar um novo projeto no Supabase automaticamente.
+5. Conectar o número de celular à Evolution API na sua VPS.
+6. Hospedar a página de vendas, o backend e o n8n.
+
+Este é um resumo geral de como você pode implementar esse sistema. Claro que haverá ajustes e personalizações específicas conforme os detalhes do seu projeto, mas espero que essa visão geral ajude a estruturar a implementação.

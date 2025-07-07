@@ -1,0 +1,107 @@
+Visão Geral do Sistema
+
+Landing Page com checkout integrado.
+
+Após o pagamento:
+
+Criar projeto no Supabase.
+
+Armazenar dados do cliente.
+
+Conectar celular à Evolution API (via VPS).
+
+Acionar fluxo N8N para ativar automação.
+
+Cobrança mensal recorrente.
+
+Se falhar o pagamento, a instância é bloqueada via API.
+
+ Roteiro Passo a Passo
+1. 🎨 Criar a Landing Page
+Campos:
+
+Nome
+
+Email
+
+Celular (WhatsApp)
+
+Nome do projeto
+
+Botão "Assinar agora"
+
+Direciona para checkout (Stripe ou Mercado Pago)
+
+2. 💳 Integração de Pagamento
+🔹 Stripe (Recomendado para SaaS)
+Plano com cobrança mensal recorrente
+
+Webhook de evento:
+
+checkout.session.completed → aciona backend para provisionar
+
+invoice.payment_failed → desativa instância
+
+🔹 Mercado Pago (opção BR)
+Assinatura recorrente com webhooks semelhantes
+
+Precisa tratar falhas e cancelamentos via cron job
+
+3. 🔄 Pós-Pagamento (Provisionamento)
+Webhook → API do seu backend → Execução:
+
+Criar usuário e projeto no Supabase via REST API ou SDK.
+
+Gravar dados do cliente e status de pagamento.
+
+Chamar Evolution API com POST /register usando número do cliente.
+
+Enviar payload ao N8N (via webhook) para iniciar a automação.
+
+4. 🔒 Controle de Acesso
+Backend agenda verificação de pagamentos com cron (diário):
+
+Se assinatura estiver "unpaid" ou cancelada:
+
+Chamar Evolution API com DELETE /disconnect/:celular
+
+Atualizar status no Supabase: inativo
+
+5. 🧾 Dashboard/Admin
+Opcional:
+
+Tela para você ver:
+
+Clientes ativos/inativos
+
+Histórico de pagamentos
+
+Log de provisionamento
+
+Pode ser feito com:
+
+Supabase + React
+
+Painel simples em Next.js
+
+📦 Organização do Projeto
+/frontend
+  - Página de venda
+  - Página de sucesso/erro
+
+/backend
+  - /api/checkout (cria link)
+  - /api/webhook (Stripe)
+  - /api/provision (chama Supabase + Evolution + N8N)
+  - /api/block (em caso de inadimplência)
+
+scripts/
+  - cronCheckPayments.js
+🛡️ Segurança
+Use tokens de autenticação para:
+
+Supabase (admin key)
+
+Evolution API (chave privada no VPS)
+
+N8N Webhook com secret

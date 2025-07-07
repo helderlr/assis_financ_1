@@ -1,0 +1,273 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Documento de Requisitos de Produto (RDP) – Assistente Financeiro Web
+
+## 1. Visão Geral
+
+**Produto:** Fynzo  
+**Cliente-alvo:** Pequenas Empresas  
+**Módulo:** Assistente Financeiro  
+**Versão:** 1.0  
+**Data:** 05/05/2025
+
+Este documento descreve os requisitos funcionais e não funcionais do módulo Assistente Financeiro Fynzo, 
+voltado para pequenas empresas.
+
+## 2. Objetivos do Módulo
+
+- Facilitar a gestão Assistente Financeira pelo navegador.
+- Pode editar os dados gerados pelo Assistente pelo whatsapp.
+- Integrar com Assistente financeiro do whatsapp.
+
+## 3. Requisitos Funcionais
+
+### 3.1. Tela Principal com barra de menu lateral com nome Fynzo e opcao de tema (claro/escuro)
+e com nome e email usuario logado e logo abaixo com as seguintes opcoes:
+- RF01: Dashboard.
+- RF02: Transacoes.
+- RF03: Lancamentos Futuros.
+- RF04: Relatórioses.
+- RF05: Categorias.
+- RF06: Sair.
+
+### 3.1. Cadastro de Categoria Conta
+
+- RF01: O sistema deve permitir o cadastro de múltiplas categorias por usuario.
+- RF02: O sistema deve armazenar dados categoria_id,nome.
+
+### 3.2. Lancamentos futuros
+
+Requisitos Funcionais da Tela de Transações
+- RF01:Listar Transações Financeiras
+Exibir lista com data, descrição, categoria, valor e ações (ex: excluir).
+Suporte a diferenciação visual entre entradas (verde) e saídas (vermelho).
+
+- RF02:Agrupar e Calcular Totais
+Mostrar totais separados de:
+Entradas (somatório de receitas).
+Saídas (somatório de despesas).
+Saldo (entradas - saídas).
+
+- RF03:Filtragem por Período
+Filtro por mês/ano (dropdown).
+Botão "Mês Atual" para retornar à visualização padrão.
+
+- RF04:Cadastro de Novas Transações
+Botão "Nova Entrada" para cadastrar receitas.
+Botão "Nova Saída" para cadastrar despesas.
+
+- RF05:Ações nas Transações
+Ícone de exclusão de transação (ícone de lixeira).
+Pode-se inferir suporte futuro para edição (não visível, mas comum).
+
+- RF06:Contagem de Registros
+Indicação da quantidade de transações listadas.
+
+### 3.3. Dashboard
+
+-Requisitos Funcionais da Tela de Dashboard
+- RF01:Exibir Resumo do Mês Atual
+Saldo do Mês: cálculo de receitas menos despesas do mês atual.
+Receitas: total de entradas registradas no mês.
+Despesas: total de saídas registradas no mês.
+Projeção: saldo estimado considerando lançamentos futuros (planejamento).
+
+- RF02:Exibir Transações Recentes
+Listagem das últimas 5 transações realizadas (entradas ou saídas).
+Exibição em gráfico (provavelmente de barras ou linhas), permitindo visualização clara dos valores.
+
+- RF03:Atualização Automática ou por Período
+O dashboard deve refletir os dados do mês corrente automaticamente.
+Pode haver (mesmo que não visível agora) suporte para alterar o mês de referência.
+
+- RF04:Indicadores visuais de tendência
+Ícones de seta para cima ou para baixo para indicar variação em relação ao mês anterior ou tendência de saldo.
+Uso de cores para facilitar a leitura (verde para receitas/projeções, vermelho para despesas).
+
+### 3.4. Transacoes
+
+Requisitos Funcionais da Tela de Transações
+- RF01: Dashboard Resumo
+Exibir total de entradas (em verde).
+Exibir total de saídas (em vermelho).
+Exibir saldo atual (entradas - saídas).
+
+- RF02: Filtros Temporais
+Permitir seleção de mês e ano (ex: abr 2025).
+Botão "Mês Atual" para retornar à visualização do mês corrente.
+
+- RF03: Lista de Transações
+Exibir transações com as colunas:
+Data
+Descrição
+Categoria
+Valor (positivo ou negativo com cor diferenciada)
+Ações (ícone de exclusão)
+
+- RF04: Cadastro de Transações
+Botão "Nova Entrada" para registrar uma receita.
+Botão "Nova Saída" para registrar uma despesa.
+
+- RF05: Ações nas Transações
+Permitir exclusão de transações por item (ícone de lixeira).
+O cursor em formato de mão indica possível ação de clique, como edição ou visualização futura.
+
+- RF06: Contador de Transações
+Exibir quantidade total de transações listadas (ex: "2 transações")
+
+### 3.5. relatorios
+
+3.6.1 Requisitos Funcionais da Tela de Balanço Mensal
+- RF01: Visualizar o balanço financeiro por mês
+Exibe um gráfico com:
+Receitas (barra verde)
+Despesas (barra vermelha)
+Saldo (barra azul)
+
+- RF02:Selecionar o ano de análise
+Permite ao usuário navegar entre anos usando setas (◀️▶️) e selecionar um ano específico (ex.: 2025).
+
+- RF03:Exibir dados detalhados por mês (tooltip)
+Ao passar o cursor sobre uma barra no gráfico, são exibidos:
+Mês
+Total de receitas
+Total de despesas
+Saldo no mês
+
+- RF04:Alternar entre diferentes tipos de relatórios
+Botões para navegar entre:
+Balanço Mensal
+Categorias
+Fluxo de Caixa
+Lançamentos Futuro
+
+- RF05:Atualizar o gráfico com base nos dados do ano selecionado
+A cada mudança de ano, o gráfico é recarregado automaticamente com os dados financeiros do período
+
+3.6.2 Requisitos Funcionais da Tela de Distribuição por Categorias
+- RF01:Selecionar período personalizado
+Campo de Data Inicial e Data Final para definir o intervalo da análise.
+Botão Aplicar para atualizar os dados com base nas datas selecionadas.
+
+- RF02:Visualizar distribuição de despesas por categoria
+Exibição em gráfico de pizza (ou doughnut).
+Percentual de cada categoria (ex: Alimentação: 100%).
+
+- RF03:Visualizar distribuição de receitas por categoria
+Também exibida em gráfico de pizza.
+Exibe nome da categoria e valor (ex: Consultoria: R$ 5.000,00).
+
+Tooltip informativo ao passar o cursor
+
+Mostra nome da categoria e valor correspondente.
+
+- RF04:Exibir o período analisado
+Mostra texto dinâmico com o intervalo atual (ex: Distribuição por categoria no período de 01/04/2025 a 02/04/2025).
+
+- RF05:Navegação entre tipos de relatório
+Botões no topo para navegar entre:
+Balanço Mensal
+Categorias (ativo)
+Fluxo de Caixa
+Lançamentos Futuro
+
+3.6.3 Requisitos Funcionais da Tela de Fluxo de Caixa
+- RF01:Filtrar por período
+Campos de Data Inicial e Data Final.
+Botão Aplicar para carregar os dados conforme o filtro.
+Opção para "Incluir lançamentos futuros" via checkbox.
+
+- RF01:Exibir receitas no período
+Valor total de receitas.
+Média diária de receita.
+Maior receita com valor e data.
+
+- RF01:Exibir despesas no período
+Valor total de despesas.
+Média diária de despesa.
+Maior despesa com valor e data.
+
+- RF01:Exibir saldo do período
+Cálculo automático do saldo: Receitas - Despesas.
+Total de dias analisados no período.
+Situação do saldo (ex: Positivo, podendo ser Negativo ou Neutro).
+
+- RF01:Exibir gráfico de evolução do saldo
+Gráfico com evolução do saldo diário ao longo do período.
+Escala vertical de valores (ex: 0 a 6000).
+
+- RF01:Navegação entre tipos de relatório
+Botões de navegação:
+Balanço Mensal
+Categorias
+Fluxo de Caixa (ativo)
+Lançamentos Futuro
+
+3.6.4 Requisitos Funcionais da Tela de Lançamentos Futuros
+- RF01:Filtrar lançamentos futuros por período
+Campos: Data Inicial e Data Final.
+Botão Aplicar para consultar os dados no intervalo.
+
+- RF01:Exibir Receitas Futuras
+Total em reais das receitas previstas.
+Quantidade de lançamentos de entrada previstos.
+
+- RF01:Exibir Despesas Futuras
+Total em reais das despesas previstas.
+Quantidade de lançamentos de saída previstos.
+
+- RF01:Exibir Saldo Previsto
+Cálculo: Receitas Futuras - Despesas Futuras.
+Total de lançamentos considerados.
+
+- RF01:Exibir distribuição por categoria
+Gráfico de pizza com a proporção dos lançamentos por categoria.
+Visual detalhado da categoria e número de lançamentos (exemplo: IPTU, 3 lançamentos).
+
+- RF01:Navegação entre relatórios
+Botões para mudar entre:
+Balanço Mensal
+Categorias
+Fluxo de Caixa
+Lançamentos Futuro (ativo)
+
+### 3.6. categorias
+Cadastrar nova categoria
+
+- RF01:O botão "Nova Categoria" permite criar uma nova categoria de transação.
+- RF02:Listar categorias existentes
+- RF03:Exibe uma lista das categorias já cadastradas (por exemplo: Alimentação, Consultoria, IPTU).
+- RF04:Editar categoria
+- RF05:Ícone de lápis indica a possibilidade de editar o nome ou dados da categoria.
+- RF06:Excluir categoria
+- RF07:Ícone de lixeira indica a possibilidade de deletar a categoria da lista.
+     
+## 4. Requisitos Não Funcionais
+
+- RNF01: O sistema deve ter disponibilidade mínima de 99,5%.
+- RNF02: Os dados financeiros devem ser criptografados em repouso e em trânsito.
+- RNF03: O tempo de resposta para operações financeiras deve ser inferior a 2 segundos.
+- RNF04: Interface responsiva para uso em dispositivos móveis.
+
+---
+
+## 5. Restrições
+
+- O módulo deve funcionar integrado aos demais módulos do Fynzo.
+- O sistema deve operar em múltiplas empresas e usuários simultaneamente (multiempresa e multiusuário).
+
+---
+
+## 6. Critérios de Aceitação
+
+- Todos os requisitos funcionais implementados e testados.
+- Nenhum bug crítico aberto no módulo financeiro.
+- Relatórios auditáveis disponíveis para conferência.
+
+---
+
+**Aprovado por:** Equipe de Produto Fynzo  
+**Revisão:** 05/05/2025

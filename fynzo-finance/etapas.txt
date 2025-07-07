@@ -1,0 +1,33 @@
+//alterar logo
+//pegar nome e email da tela login e mostrar na barra lateral
+
+pode alterar a tela login e tirar o campo nome porque ele e pra ser recuperado buscando na base do supabase do cadastro usuarios buscando pelo campo email
+
+ao clicar em esqueci a senha ele altera o texto do botao entrar para  enviar link de recuperacao e coloca um link abaixo do botao com seta e texto voltar para login
+
+config github no cursor 
+config supabase no cursor
+config banco neon postgres no cursor
+criar repositorio projeto
+ok config sandgrid
+ok config hostinger
+ok config cloudflare
+ok rel grafico lanc futuro
+ok criar conta sendgrid e pegar apikey e testar email de recuperacao
+//criar tela dashboard
+// criar tela categoria
+// criar janela categoria
+//chamar a janela ao clicar botao nova categoria
+// tela transacao
+// janela entrada
+//janela saida
+tema claro /escuro
+//janela de lancamentos futuros
+janela nova entrada
+janela nova saida
+//Modelar as tabelas no Supabase.
+//Criar as rotas de API (Node.js/Express ou Next.js API Routes).
+//Integrar com SendGrid, Nodemailer ou outro serviço.
+Criar templates de e-mail profissionais.
+
+em7778.fynzo.com.br
